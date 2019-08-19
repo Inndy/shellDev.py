@@ -14,7 +14,7 @@ import subprocess
 import re
 import os
 import sys
-from optparse import OptionParser
+import argparse
 import hashlib
 
 shellDevHpp = \
@@ -424,16 +424,17 @@ def chkMinGwToolkit(usrInputMinGWPath):
 
 if __name__ == "__main__":
     print(title)
-    parser = OptionParser()
-    parser.add_option("-s", "--src", dest="source",
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--src", dest="source",
           help="shelldev c/c++ script path.", metavar="PATH")
-    parser.add_option("-m", "--mgw", dest="mingwPath",
+    parser.add_argument("-m", "--mgw", dest="mingwPath",
           help="set mingw path, mingw path you select determine payload is 32bit or 64bit.", metavar="PATH")
-    parser.add_option("--noclear",
+    parser.add_argument("--noclear",
           action="store_true", dest="dontclear", default=False,
           help="don't clear junk file after generate shellcode.")
-    (options, args) = parser.parse_args()
-    if options.source is None or options.mingwPath is None:
+
+    options = parser.parse_args()
+    if not options.source or not options.mingwPath:
         parser.print_help()
     else:
         chkMinGwToolkit(options.mingwPath)
