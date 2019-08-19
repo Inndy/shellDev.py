@@ -306,7 +306,7 @@ def jmpShellCodeEntry(inAsmPath, outAsmPath):
         src = r.read()
         # src = src.replace('.rdata', 'shell')
         if src.count(".rdata") > 0:
-            print '[!] Detect global variables !! It\'dangerous !! Take Care!!'
+            print('[!] Detect global variables !! It\'dangerous !! Take Care!!')
 
         funcNameArr = re.findall(r'.globl[\t\x20]+(.+)', src, re.IGNORECASE)
         entryFunc = ''
@@ -374,7 +374,7 @@ def genShellcode(cppPath, clearAfterRun):
 char str_%(definedFuncName)s[] = "%(WinApiName)s";
 func<decltype(&%(WinApiName)s)> %(definedFuncName)s( (FARPROC) blindFindFunc( modHash(str_%(definedFuncName)s) ) );
 ''' % { 'definedFuncName' : m.group(1).replace('\x20', ''), 'WinApiName' : m.group(2).replace('\x20', '')}
-                print '[+] Detect fetchAPI() from %s -> %s' % ( m.group(2).replace('\x20', ''), m.group(1).replace('\x20', ''))
+                print('[+] Detect fetchAPI() from %s -> %s' % ( m.group(2).replace('\x20', ''), m.group(1).replace('\x20', '')))
                 line = line.replace(m.group(0), replaceData)
 
             for argStr in re.findall(r'[(\x20,]+(\x22[^\x22]+\x22)[\x20,)]', line):
@@ -403,9 +403,9 @@ func<decltype(&%(WinApiName)s)> %(definedFuncName)s( (FARPROC) blindFindFunc( mo
 
 def chkExeExist(name, path):
     if os.path.exists(path):
-        print '\t[v] %s exists!' % name
+        print('[v] %s exists!' % name)
     else:
-        print '\t[x] %s not found at %s' % (name, path)
+        print('[x] %s not found at %s' % (name, path))
         sys.exit(1)
 
 def chkMinGwToolkit(usrInputMinGWPath):
@@ -414,9 +414,9 @@ def chkMinGwToolkit(usrInputMinGWPath):
     if not 'bin' in mingwPath:
         mingwPath = os.path.join(mingwPath, 'bin')
         if os.path.exists(mingwPath):
-            print '[v] check mingw tool path: %s ' % mingwPath
+            print('[v] check mingw tool path: %s ' % mingwPath)
         else:
-            print '[x] sorry, mingw toolkit not found in %s' % mingwPath
+            print('[x] sorry, mingw toolkit not found in %s' % mingwPath)
     chkExeExist('gcc', os.path.join(mingwPath, 'gcc.exe'))
     chkExeExist('as', os.path.join(mingwPath, 'as.exe'))
     chkExeExist('objcopy', os.path.join(mingwPath, 'objcopy.exe'))
