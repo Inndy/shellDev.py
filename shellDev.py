@@ -10,12 +10,12 @@ title = \
 v1.1 by aaaddress1@chroot.org
 """
 
-import subprocess
-import re
-import os
-import sys
 import argparse
 import hashlib
+import os
+import re
+import subprocess
+import sys
 
 shellDevHpp = \
 """
